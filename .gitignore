@@ -1,0 +1,30 @@
+# Dane surowe i przetworzone (opcjonalnie - patrz komentarz w README)
+# Jeśli dane są małe (<50MB), możesz je wersjonować - usuń wtedy poniższe linie
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.egg-info/
+
+# Środowiska
+.env
+venv/
+.venv/
+
+# Bazy danych
+*.db
+*.sqlite
+*.sqlite3
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
