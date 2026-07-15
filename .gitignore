@@ -1,8 +1,10 @@
 # Dane surowe i przetworzone (opcjonalnie - patrz komentarz w README)
 # Jeśli dane są małe (<50MB), możesz je wersjonować - usuń wtedy poniższe linie
 data/raw/*
+data/interim/*
 data/processed/*
 !data/raw/.gitkeep
+!data/interim/.gitkeep
 !data/processed/.gitkeep
 
 # Python
