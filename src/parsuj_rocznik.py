@@ -95,7 +95,7 @@ def parsuj_ruch_naturalny(sciezka):
             for rok, r in _czytaj_sekcje_ogolem(sh)}
 
 
-def zbuduj_ramke(sciezka, etykieta_zrodla="RD2024"):
+def zbuduj_ramke(sciezka, etykieta_zrodla="RD2025"):
     """Łączy oba parsery w jeden DataFrame z kolumną proweniencji `zrodlo`.
 
     Zwraca pełny zakres źródła (bez zawężania do lat projektu).
