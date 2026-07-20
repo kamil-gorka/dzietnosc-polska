@@ -1,6 +1,7 @@
 # Dane surowe - odtwarzalne skryptami z src/ (patrz README)
 data/raw/*
 !data/raw/.gitkeep
+!data/raw/SOURCES.md
 
 # Python
 __pycache__/
