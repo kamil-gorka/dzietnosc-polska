@@ -51,6 +51,25 @@ projektu następuje dopiero w `zloz_dane.py`.
   
 ---
 
+## kohorty_kobiet.csv
+
+- **Źródło:** Bank Danych Lokalnych GUS, REST API
+- **Temat (subject):** P2137 (Ludność wg grup wieku i płci)
+- **Zakres lat:** 1995–2025, poziom krajowy (`unit-level=0`)
+- **Data pobrania:** 2026-07-21
+- **Skrypt pobierający:** `src/pobierz_kohorty.py`
+Zmienne (kobiety, grupy 5-letnie):
+  15-19 → 72299
+  20-24 → 47738
+  25-29 → 47696
+  30-34 → 47695
+  35-39 → 47716
+  40-44 → 47698
+  45-49 → 47727
+Skrypt pobierający: notebooks/02_pobranie_kohorty.ipynb
+
+---
+
 ## Uwaga o odtwarzalności
 
 Pliki BDL są pobierane automatycznie i powinny być identyczne przy
