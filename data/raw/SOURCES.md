@@ -11,7 +11,7 @@ pochodzą pliki źródłowe i w jakiej wersji zostały pobrane.
 - **Endpoint:** `https://bdl.stat.gov.pl/api/v1`
 - **Temat (subject):** P2346
 - **Zmienne:** TFR, urodzenia żywe, zgony, ludność w grupach wieku 0–14, 15–49, 65+
-- **Zakres lat:** 1995–2025
+- **Zakres lat:** 1995–2025, poziom krajowy (`unit-level=0`)
 - **Data pobrania:** 2026-07-13
 - **Skrypt:** `src/pobierz_bdl.py`
 - **Licencja:** dane publiczne GUS, dozwolone ponowne wykorzystanie z podaniem źródła
@@ -48,29 +48,59 @@ projektu następuje dopiero w `zloz_dane.py`.
 - **Nieużywane z Rocznika:** struktura wieku (`03_ludność_struktura wg wieku`)
   — inny podział grup wiekowych niż BDL, patrz README, sekcja
   *Braki danych: struktura wiekowa 1989–1994*.
-  
+
 ---
 
 ## kohorty_kobiet.csv
 
 - **Źródło:** Bank Danych Lokalnych GUS, REST API
+- **Endpoint:** `https://bdl.stat.gov.pl/api/v1`
 - **Temat (subject):** P2137 (Ludność wg grup wieku i płci)
 - **Zakres lat:** 1995–2025, poziom krajowy (`unit-level=0`)
 - **Data pobrania:** 2026-07-21
-- **Skrypt pobierający:** `src/pobierz_kohorty.py`
+- **Skrypt:** `src/pobierz_kohorty.py`
 - **Zmienne** (kobiety, grupy 5-letnie):
-  15-19 → 72299
-  20-24 → 47738
-  25-29 → 47696
-  30-34 → 47695
-  35-39 → 47716
-  40-44 → 47698
-  45-49 → 47727
+  - 15–19 → 72299
+  - 20–24 → 47738
+  - 25–29 → 47696
+  - 30–34 → 47695
+  - 35–39 → 47716
+  - 40–44 → 47698
+  - 45–49 → 47727
 - **Licencja:** dane publiczne GUS, dozwolone ponowne wykorzystanie z podaniem źródła
 
 > Numeracja ID nie jest ciągła — 72299 (15–19) odstaje od pozostałych
 > (47695–47738). Zweryfikowano przez `/variables/{id}`: wszystkie siedem
 > zmiennych ma `n2 = "kobiety"`, właściwe grupy wieku w `n1`.
+
+---
+
+## urodzenia_roczniki.csv
+
+- **Źródło:** Bank Danych Lokalnych GUS, REST API
+- **Endpoint:** `https://bdl.stat.gov.pl/api/v1`
+- **Temat (subject):** P2167 (Urodzenia żywe wg pojedynczych roczników wieku matki)
+- **Zakres lat:** 2002–2025, poziom krajowy (`unit-level=0`)
+- **Data pobrania:** 2026-07-22
+- **Skrypt:** `src/pobierz_urodzenia.py`
+- **Zmienne:** 40 kolumn — `ogółem`, `12 i mniej`, roczniki 13–49, `50 i więcej`.
+  Mapa ID pobierana dynamicznie z `/variables?subject-id=P2167`, nie zapisana na sztywno.
+- **Licencja:** dane publiczne GUS, dozwolone ponowne wykorzystanie z podaniem źródła
+
+> **Suma kontrolna:** `ogółem` = suma 39 roczników składowych (różnica maks. 0
+> we wszystkich latach). Brak kategorii „wiek nieustalony".
+
+> **Zakres krótszy niż `bdl_polska.csv`:** P2167 zaczyna się w 2002, nie 1995.
+> Dekompozycja TFR/ASFR obejmie 2002–2025; rokiem bazowym dla kontrfaktycznego
+> TFR jest 2002.
+
+> **Traktowanie skrajów (decyzja metodologiczna):** urodzenia matek poniżej 15 lat
+> doliczane do grupy 15–19, powyżej 49 lat do grupy 45–49 — zgodnie z praktyką GUS
+> przy liczeniu TFR. Skala: <0,03% urodzeń rocznie (2024: 25 urodzeń w „50 i więcej",
+> 25 w grupach poniżej 15 lat, przy 251 782 ogółem). ASFR skrajnych kohort jest przez
+> to minimalnie zawyżony — licznik obejmuje kobiety spoza mianownika.
+> Agregacja roczników do kohort 5-letnich następuje w `zloz_dane.py`, nie tutaj
+> (zasada: raw stays raw).
 
 ---
 
