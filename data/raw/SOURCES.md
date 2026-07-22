@@ -8,7 +8,7 @@ pochodzą pliki źródłowe i w jakiej wersji zostały pobrane.
 ## bdl_polska.csv
 
 - **Źródło:** Bank Danych Lokalnych GUS, REST API
-- **Endpoint:** `https://api.stat.gov.pl/api/v1`
+- **Endpoint:** `https://bdl.stat.gov.pl/api/v1`
 - **Temat (subject):** P2346
 - **Zmienne:** TFR, urodzenia żywe, zgony, ludność w grupach wieku 0–14, 15–49, 65+
 - **Zakres lat:** 1995–2025
@@ -58,7 +58,7 @@ projektu następuje dopiero w `zloz_dane.py`.
 - **Zakres lat:** 1995–2025, poziom krajowy (`unit-level=0`)
 - **Data pobrania:** 2026-07-21
 - **Skrypt pobierający:** `src/pobierz_kohorty.py`
-Zmienne (kobiety, grupy 5-letnie):
+- **Zmienne** (kobiety, grupy 5-letnie):
   15-19 → 72299
   20-24 → 47738
   25-29 → 47696
@@ -66,7 +66,11 @@ Zmienne (kobiety, grupy 5-letnie):
   35-39 → 47716
   40-44 → 47698
   45-49 → 47727
-Skrypt pobierający: notebooks/02_pobranie_kohorty.ipynb
+- **Licencja:** dane publiczne GUS, dozwolone ponowne wykorzystanie z podaniem źródła
+
+> Numeracja ID nie jest ciągła — 72299 (15–19) odstaje od pozostałych
+> (47695–47738). Zweryfikowano przez `/variables/{id}`: wszystkie siedem
+> zmiennych ma `n2 = "kobiety"`, właściwe grupy wieku w `n1`.
 
 ---
 
