@@ -7,7 +7,7 @@
 
 ## Dlaczego ten projekt
 
-Rok **1989** — początek szeregu — zastał TFR na poziomie 1,99, tuż poniżej progu zastępowalności. Rok **2024** przyniósł najniższy odczyt w historii pomiarów — **1,099**. Ten projekt rekonstruuje pełen łuk tego spadku na danych źródłowych GUS i sprawdza, **które składowe demograficzne za niego odpowiadają**.
+Rok **1989** — początek szeregu — zastał TFR na poziomie 2,08, tuż poniżej progu zastępowalności. Rok **2024** przyniósł najniższy odczyt w historii pomiarów — **1,099**. Ten projekt rekonstruuje pełen łuk tego spadku na danych źródłowych GUS i sprawdza, **które składowe demograficzne za niego odpowiadają**.
 
 Projekt nie zatrzymuje się na stwierdzeniu „dzietność spada". Pyta:
 - Czy kobiety rodzą **mniej dzieci**, czy tylko **później**? (efekt *quantum* vs *tempo*)
