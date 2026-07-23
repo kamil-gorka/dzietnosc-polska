@@ -23,7 +23,11 @@ Projekt nie zatrzymuje się na stwierdzeniu „dzietność spada". Pyta:
 
 <!-- TODO: uzupełnić po analizie. Format: 3-5 punktów, każdy = jedno zdanie + liczba -->
 
-1. *(do uzupełnienia)*
+1. Spadek urodzeń 2002–2025 (−115,5 tys.) rozkłada się niemal po połowie:
+   47,1% to efekt kurczenia się kohort kobiet w wieku rozrodczym,
+   52,9% to spadek cząstkowych współczynników płodności. Efekt struktury
+   zmienił znak w 2016/17 — do tego momentu struktura wieku *dodawała*
+   urodzeń względem stanu z 2002.
 2. *(do uzupełnienia)*
 3. *(do uzupełnienia)*
 
