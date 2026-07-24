@@ -14,21 +14,23 @@ Projekt nie zatrzymuje się na stwierdzeniu „dzietność spada". Pyta:
 - Kiedy nastąpiły punkty zwrotne i co się z nimi zbiegło?
 - Jak zmieniała się struktura wieku matek i jak przekłada się to na liczbę urodzeń?
 
-<!-- TODO: po ukończeniu analizy wstaw tu 1 kluczowy wykres jako "hero image" -->
-<!-- ![Spadek TFR 1989-2025](figures/01_tfr_trend.png) -->
+![Rozkład ASFR 2002/2013/2025](figures/07_rozklad_asfr.png)
 
 ---
 
 ## Kluczowe wnioski
-
-<!-- TODO: uzupełnić po analizie. Format: 3-5 punktów, każdy = jedno zdanie + liczba -->
 
 1. Spadek urodzeń 2002–2025 (−115,5 tys.) rozkłada się niemal po połowie:
    47,1% to efekt kurczenia się kohort kobiet w wieku rozrodczym,
    52,9% to spadek cząstkowych współczynników płodności. Efekt struktury
    zmienił znak w 2016/17 — do tego momentu struktura wieku *dodawała*
    urodzeń względem stanu z 2002.
-2. *(do uzupełnienia)*
+2. Sam TFR ukrywa przebudowę rozkładu płodności. Między 2002 a 2013
+   TFR wzrósł (1,24 → 1,28) przy niezmienionym położeniu szczytu
+   (grupa 25–29), ale masa przesunęła się: ASFR dla 20–24 spadł o 27%,
+   dla 30–34 wzrósł o 35%. Do 2025 szczyt się rozmył — grupy 25–29
+   i 30–34 zrównały się (0,074 vs 0,074), a TFR spadł do 1,08.
+   Przesunięcie w prawo nie jest procesem zakończonym.
 3. *(do uzupełnienia)*
 
 ---
