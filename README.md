@@ -31,7 +31,18 @@ Projekt nie zatrzymuje się na stwierdzeniu „dzietność spada". Pyta:
    dla 30–34 wzrósł o 35%. Do 2025 szczyt się rozmył — grupy 25–29
    i 30–34 zrównały się (0,074 vs 0,074), a TFR spadł do 1,08.
    Przesunięcie w prawo nie jest procesem zakończonym.
-3. *(do uzupełnienia)*
+3. Płodność nie tylko spadła — przesunęła się w czasie. Średni wiek matki
+   liczony z ASFR wzrósł z **27,7 lat (2002) do 30,5 lat (2025)** — o 2,75 roku,
+   ok. 1,2 roku na dekadę. W 2025 przeciętna matka po raz pierwszy rodzi po
+   trzydziestce. To domyka obraz z wykresów 6–7: spadek urodzeń to nie tylko
+   mniej kobiet (wniosek 1) i niższe ASFR (wniosek 2), ale też coraz późniejszy
+   harmonogram rodzicielstwa, który dodatkowo tłumi końcową dzietność przez
+   skracające się okno rozrodcze.
+
+   *Zastrzeżenie metodologiczne: to miara przekrojowa (period), zawyżona
+   w okresie intensywnego odkładania względem ostatecznej dzietności
+   kohortowej. Pełny efekt poznamy dopiero, gdy dzisiejsze roczniki 25–35
+   zamkną swoją historię reprodukcyjną.*
 
 ---
 
