@@ -76,8 +76,9 @@ dzietnosc-polska/
 │   ├── interim/          # pośrednie wyniki parsowania (rocznik_pelny.csv)
 │   └── processed/        # dane po czyszczeniu, gotowe do analizy
 ├── notebooks/
-│   ├── 01_eksploracja.ipynb
-│   └── 02_pobranie_kohorty.ipynb
+│   ├── 01_eksploracja.ipynb       # eksploracja + wykresy narracyjne (1–7)
+│   ├── 02_pobranie_kohorty.ipynb  # pobranie kohort kobiet (P2137)
+│   └── walidacja.ipynb            # kontrola zgodności serii
 ├── src/
 │   ├── pobierz_bdl.py       # klient API GUS BDL (TFR, ruch naturalny)
 │   ├── pobierz_kohorty.py   # kobiety wg grup wieku 15–49 (P2137)
@@ -89,7 +90,8 @@ dzietnosc-polska/
 │   ├── zloz_asfr.py         # agregacja ASFR + kontrola TFR
 │   └── sprawdzenie.py       # walidacja zgodności serii
 ├── sql/
-│   └── analiza.sql       # zapytania analityczne
+│   ├── 01_schemat.sql    # schemat gwiazdy: wymiary + fakty, klucze, FK
+│   └── 02_analiza.sql    # zapytania analityczne (widok, okna, dekompozycja)
 ├── figures/              # wyeksportowane wykresy
 ├── docs/                 # dokumentacja i kontekst analityczny
 ├── environment.yml       # definicja środowiska (reprodukowalność)
@@ -124,7 +126,10 @@ python src/pobierz_urodzenia.py
 python src/zloz_dane.py
 python src/zloz_asfr.py
 
-# 7. Uruchom notebooki
+# 7. Zbuduj bazę SQLite (schemat gwiazdy + załadowanie CSV)
+python src/laduj_dane.py
+
+# 8. Uruchom notebooki
 jupyter lab
 ```
 
@@ -133,6 +138,35 @@ jupyter lab
 ## Stack technologiczny
 
 **Python** (pandas, matplotlib, seaborn, requests) · **SQL** (SQLite) · **Jupyter** · **Git**
+
+---
+
+## Analiza SQL
+
+Dane trafiają do bazy SQLite w **schemacie gwiazdy** (dwie tabele
+faktów: roczna i ASFR; dwa wymiary: rok i grupa wieku). Warstwa SQL niezależnie waliduje wnioski z warstwy wizualnej w Pythonie i dokłada analizy okienkowe niedostępne na pojedynczym wykresie. Pełne zapytania z komentarzami:
+`sql/02_analiza.sql`.
+
+- **Test integralności** — czy dwa niezależne źródła urodzeń
+  (fakt ASFR wg wieku matki vs ruch naturalny) domykają się?
+  `JOIN` + różnica sum. → Zero rozbieżności w całym oknie 2002–2025.
+- **Średni wiek matki (MAB)** — jak przesuwał się kalendarz rodzenia?
+  Średnia środków przedziałów ważona ASFR-em (nie surowymi urodzeniami).
+  → +2,75 roku (27,72 → 30,46), trend ściśle monotoniczny.
+- **Dynamika urodzeń** — zmiana rok-do-roku i skumulowany ubytek.
+  Funkcje okienkowe `LAG` i `SUM() OVER` (zestawione przez CTE, bo
+  SQLite zabrania zagnieżdżania funkcji okienkowych). → Skumulowany
+  ubytek −326 tys. urodzeń względem 1989; krzywa zawraca w górę tylko
+  raz (2003–2009).
+- **Dekompozycja kontrfaktyczna** — jaką część spadku urodzeń wyjaśnia
+  sama struktura wieku, a jaką zmiana zachowań? Zamrożenie struktury
+  kobiet na 2002, porównanie scenariuszy przez dwupoziomowe CTE.
+  → Efekt struktury zmienia znak w 2016/17 i odpowiada za 47,1%
+  spadku urodzeń do 2025.
+
+Komentarze w `02_analiza.sql` używają etykiet epistemicznych
+(`[FAKT EMPIRYCZNY]`, `[TWIERDZENIE STRUKTURALNE]`), oddzielając to,
+co dane pokazują, od tego, co się z nich interpretuje.
 
 ---
 
@@ -147,6 +181,7 @@ Projekt wyrasta z szerszej analizy systemowej kryzysu demograficznego (`docs/`),
 Repozytorium nie zawiera surowych danych — `data/raw/` jest w `.gitignore`.
 Pipeline odtwarzający zbiór opisano wyżej, w sekcji *Jak odtworzyć analizę*.
 Spis źródeł z datami pobrania: `data/raw/SOURCES.md`.
+Warstwa SQL stanowi trzeci, niezależny tor walidacji — kluczowe wnioski (dekompozycja, MAB, dynamika urodzeń) odtworzono w SQLite z tego samego zbioru, uzyskując zgodność co do jednostki urodzeń.
 
 ### Walidacja danych historycznych
 
@@ -213,6 +248,6 @@ W repozytorium znajdują się: `data/interim/rocznik_pelny.csv` (wynik parsera),
 
 ## Autor
 
-**Kamil** · [LinkedIn](#) · [GitHub](#)
+**Kamil Górka** · [LinkedIn](https://www.linkedin.com/in/kamil-g%C3%B3rka-505636252) · [GitHub](https://github.com/kamil-gorka)
 
 *Projekt portfolio — analiza danych.*
