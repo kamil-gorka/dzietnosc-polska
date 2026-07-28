@@ -102,3 +102,56 @@ SELECT
     SUM(zmiana_rdr) OVER (ORDER BY rok) AS skumulowana_zmiana
 FROM zmiany
 ORDER BY rok;
+
+-- ------------------------------------------------------------
+-- DEKOMPOZYCJA KONTRFAKTYCZNA (walidacja Wykresu 6)
+-- Rozkład spadku urodzeń 2002-2025 na efekt behawioralny (ASFR)
+-- i efekt strukturalny (zmiana liczebności kohort kobiet).
+--
+-- Metoda: struktura wieku kobiet ZAMROŻONA na 2002 (nie 1995 —
+-- 2002 to pierwszy rok z ASFR, baseline całego okna).
+--   faktyczne      = Σ (asfr[rok] × kobiety[rok])       = urodzenia_zywe
+--   kontrfaktyczne = Σ (asfr[rok] × kobiety[2002])
+--   efekt struktury = faktyczne − kontrfaktyczne
+--
+-- Zamrożony mianownik to LICZEBNOŚCI kobiet (nie udziały procentowe).
+-- ROUND tylko w warstwie prezentacji — sumy liczone na pełnej precyzji.
+--
+-- [FAKT EMPIRYCZNY] Zgodność z analizą w Pythonie:
+--   Zmiana znaku efektu struktury między 2016 (+1030) a 2017 (-5281).
+--   Efekt struktury w 2025 = -54454 urodzeń = 47,1% całego spadku
+--   (spadek 2002->2025 = 115501; struktura odjęła 54454).
+-- [TWIERDZENIE STRUKTURALNE] Efekt struktury nie jest przyczyną
+--   niezależną — struktura wieku jest skutkiem dzietności sprzed
+--   25-30 lat. Dywidenda strukturalna (szczyt +25646 w 2010) wygasa
+--   monotonicznie i odwraca się, bo kohorty wyżu lat 80. wychodzą
+--   z wieku rozrodczego, a wchodzą małe roczniki lat 90.
+-- ------------------------------------------------------------
+WITH struktura_2002 AS (
+    SELECT
+        grupa_wieku,
+        kobiety AS kobiety_baza
+    FROM widok_asfr
+    WHERE rok = 2002
+),
+scenariusze AS (
+    SELECT
+        w.rok,
+        SUM(w.asfr * w.kobiety)      AS faktyczne,
+        SUM(w.asfr * s.kobiety_baza) AS kontrfaktyczne
+    FROM widok_asfr AS w
+    JOIN struktura_2002 AS s
+        ON w.grupa_wieku = s.grupa_wieku
+    GROUP BY w.rok
+)
+SELECT
+    rok,
+    ROUND(faktyczne)                  AS faktyczne,
+    ROUND(kontrfaktyczne)             AS kontrfaktyczne,
+    ROUND(faktyczne - kontrfaktyczne) AS efekt_struktury,
+    CASE
+        WHEN faktyczne >= kontrfaktyczne THEN 'sprzyja'
+        ELSE 'odejmuje'
+    END                               AS znak_efektu
+FROM scenariusze
+ORDER BY rok;
