@@ -27,3 +27,6 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Dokumenty robocze - poza portfolio
+docs/sar_pelna.md
