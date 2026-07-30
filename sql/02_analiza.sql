@@ -75,7 +75,7 @@ ORDER BY rok;
 -- potwierdzeniu przez test integralności, że oba źródła są tożsame.
 --
 -- LAG  -> zmiana rok-do-roku (lokalna). NULL dla 1989 (brak poprzednika).
--- SUM() OVER -> suma krocząca (skumulowana zmiana względem 1995).
+-- SUM() OVER -> suma krocząca (skumulowana zmiana względem 1989).
 --
 -- CTE (WITH) konieczne: SQLite zabrania zagnieżdżania funkcji
 -- okienkowej wewnątrz innej funkcji okienkowej. Pierwsze piętro
